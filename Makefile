@@ -1,5 +1,5 @@
 test:
-	@go test ./...
+	@go test -cover -v ./...
 
 build:
 	@go build
@@ -10,7 +10,7 @@ run: build
 all:
 	@clear
 	@echo ""
-	go test ./...
+	go test -cover -v ./...
 	@echo ""
 	go build -v
 	@echo ""
