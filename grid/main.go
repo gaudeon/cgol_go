@@ -1,3 +1,4 @@
+// grid - responsible for grid data and grid helper functions
 package grid
 
 import "math/rand"
@@ -6,53 +7,53 @@ import "time"
 var MAX_STATE_VALUE uint32 = 2
 
 type Grid struct {
-    Cols uint32
-    Rows uint32
-    Data []uint32
+	Cols uint32
+	Rows uint32
+	Data []uint32
 }
 
-func GenerateRandomizedGrid(cols uint32, rows uint32) (Grid) {
-    grid_size := int(cols * rows)
+func GenerateRandomizedGrid(cols uint32, rows uint32) Grid {
+	grid_size := int(cols * rows)
 
-    grid := Grid{Cols: cols, Rows: rows, Data: make([]uint32, grid_size)}
+	grid := Grid{Cols: cols, Rows: rows, Data: make([]uint32, grid_size)}
 
-    rand.Seed(time.Now().Unix())
+	rand.Seed(time.Now().Unix())
 
-    for i := 0; i < grid_size; i++ {
-        grid.Data[i] = rand.Uint32() % MAX_STATE_VALUE
-    }
+	for i := 0; i < grid_size; i++ {
+		grid.Data[i] = rand.Uint32() % MAX_STATE_VALUE
+	}
 
-    return grid
+	return grid
 }
 
-func (g Grid) GetCellAtIndex(index uint32) (uint32) {
-    var value uint32 = 0
+func (g Grid) GetCellAtIndex(index uint32) uint32 {
+	var value uint32 = 0
 
-    if (0 <= index && index < g.Rows * g.Cols) {
-        value = g.Data[index]
-    }
+	if 0 <= index && index < g.Rows*g.Cols {
+		value = g.Data[index]
+	}
 
-    return value
+	return value
 }
 
-func (g Grid) GetCellAtXY(x uint32, y uint32) (uint32) {
-    var value uint32 = 0
+func (g Grid) GetCellAtXY(x uint32, y uint32) uint32 {
+	var value uint32 = 0
 
-    if (0 <= x && x < g.Cols && 0 <= y && y < g.Rows) {
-        value = g.Data[x + y * g.Rows]
-    }
+	if 0 <= x && x < g.Cols && 0 <= y && y < g.Rows {
+		value = g.Data[x+y*g.Rows]
+	}
 
-    return value
+	return value
 }
 
 func (g Grid) SetCellAtIndex(index uint32, value uint32) {
-    if (0 <= index && index < g.Rows * g.Cols) {
-        g.Data[index] = value
-    }
+	if 0 <= index && index < g.Rows*g.Cols {
+		g.Data[index] = value
+	}
 }
 
 func (g Grid) SetCellAtXY(x uint32, y uint32, value uint32) {
-    if (0 <= x && x < g.Cols && 0 <= y && y < g.Rows) {
-        g.Data[x + y * g.Rows] = value
-    }
+	if 0 <= x && x < g.Cols && 0 <= y && y < g.Rows {
+		g.Data[x+y*g.Rows] = value
+	}
 }

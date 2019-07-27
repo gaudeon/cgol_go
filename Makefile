@@ -1,20 +1,33 @@
+GO = go
+
+FMTARGS = fmt
+TESTARGS = test -cover -v
+BUILDARGS = build -v
+
+PROG = ./cgol_go
+
+fmt:
+	@$(GO) $(FMTARGS) ./...
+
 test:
-	@go test -cover -v ./...
+	@$(GO) $(TESTARGS) ./...
 
 build:
-	@go build
+	@$(GO) $(BUILDARGS)
 
 run: build
-	@./cgol_go
+	@$(PROG)
 
 all:
 	@clear
 	@echo ""
-	go test -cover -v ./...
+	$(GO) $(FMTARGS) ./...
 	@echo ""
-	go build -v
+	$(GO) $(TESTARGS) ./...
 	@echo ""
-	./cgol_go
+	$(GO) $(BUILDARGS)
+	@echo ""
+	$(PROG)
 	@echo ""
 
-.PHONY: test build run all
+.PHONY: fmt test build run all
