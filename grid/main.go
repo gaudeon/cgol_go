@@ -4,7 +4,11 @@ package grid
 import "math/rand"
 import "time"
 
-var MAX_STATE_VALUE uint32 = 2
+const MAX_STATE_VALUE uint32 = 1
+const (
+	Dead uint32 = iota
+	Alive
+)
 
 type Grid struct {
 	Cols uint32
@@ -20,14 +24,14 @@ func GenerateRandomizedGrid(cols uint32, rows uint32) Grid {
 	rand.Seed(time.Now().Unix())
 
 	for i := 0; i < grid_size; i++ {
-		grid.Data[i] = rand.Uint32() % MAX_STATE_VALUE
+		grid.Data[i] = rand.Uint32() % (MAX_STATE_VALUE + 1)
 	}
 
 	return grid
 }
 
 func (g Grid) GetCellAtIndex(index uint32) uint32 {
-	var value uint32 = 0
+	var value uint32 = Dead
 
 	if 0 <= index && index < g.Rows*g.Cols {
 		value = g.Data[index]
@@ -37,7 +41,7 @@ func (g Grid) GetCellAtIndex(index uint32) uint32 {
 }
 
 func (g Grid) GetCellAtXY(x uint32, y uint32) uint32 {
-	var value uint32 = 0
+	var value uint32 = Dead
 
 	if 0 <= x && x < g.Cols && 0 <= y && y < g.Rows {
 		value = g.Data[x+y*g.Rows]
