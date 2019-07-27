@@ -3,9 +3,9 @@ package grid
 
 import "testing"
 
-var COLS uint32 = 10
-var ROWS uint32 = 10
-var SIZE int = int(COLS * ROWS)
+const COLS uint32 = 10
+const ROWS uint32 = 10
+const SIZE int = int(COLS * ROWS)
 
 func TestGenerateRandomizedGrid(t *testing.T) {
 	our_grid := GenerateRandomizedGrid(COLS, ROWS)

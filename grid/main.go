@@ -6,8 +6,8 @@ import "time"
 
 const MAX_STATE_VALUE uint32 = 1
 const (
-	Dead uint32 = iota
-	Alive
+	CELL_DEAD uint32 = iota
+	CELL_ALIVE
 )
 
 type Grid struct {
@@ -31,7 +31,7 @@ func GenerateRandomizedGrid(cols uint32, rows uint32) Grid {
 }
 
 func (g Grid) GetCellAtIndex(index uint32) uint32 {
-	var value uint32 = Dead
+	var value uint32 = CELL_DEAD
 
 	if 0 <= index && index < g.Rows*g.Cols {
 		value = g.Data[index]
@@ -41,7 +41,7 @@ func (g Grid) GetCellAtIndex(index uint32) uint32 {
 }
 
 func (g Grid) GetCellAtXY(x uint32, y uint32) uint32 {
-	var value uint32 = Dead
+	var value uint32 = CELL_DEAD
 
 	if 0 <= x && x < g.Cols && 0 <= y && y < g.Rows {
 		value = g.Data[x+y*g.Rows]
